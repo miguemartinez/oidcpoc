@@ -15,3 +15,11 @@ jobs:
     - run: |
         echo "Hello ${{ github.event.inputs.name }}!"
         echo "- in ${{ github.event.inputs.home }}!"
+        jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Google Chat Notification
+      uses: CommonMarvel/google-chat-notification@v1.1.1
+      with:
+        url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
