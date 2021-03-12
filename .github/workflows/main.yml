@@ -4,7 +4,8 @@ name: closing of the issue
 
 # Controls when the action will run. 
 on:
-  issues: closed
+  issues:
+    closed:
   
 jobs:
   notify:
