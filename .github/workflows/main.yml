@@ -14,8 +14,9 @@ jobs:
     - run: |
         echo "webhookurl ${{ secrets.GOOGLE_CHAT_WEBHOOK }}!"
     - name: Google Chat Notification
-      uses: CommonMarvel/google-chat-notification@v1.1.1
+      uses: Co-qn/google-chat-notification@releases/v1
       with:
-        name: "test"
-        url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
-        data: "test"
+          name: Build
+          url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
+          status: ${{ job.status }}
+      if: always()
