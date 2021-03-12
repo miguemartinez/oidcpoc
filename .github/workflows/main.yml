@@ -4,8 +4,8 @@ name: closing of the issue
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   issues: closed
+  
 jobs:
   notify:
     runs-on: ubuntu-latest
