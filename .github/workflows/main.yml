@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
-        echo "webhookurl ${{ secrets.WEBHOOK_URL }}!"
+        echo "webhookurl ${{ secrets.WEBHOOK_URL }}!"|
     - name: Invoke deployment hook
       uses: distributhor/workflow-webhook@v1
       env:
         webhook_type: 'json-extended'
         webhook_url: ${{ secrets.WEBHOOK_URL }}
         webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
-        data: "${{github.body}}"
+        data: '{ "weapon": "${{github.body}}"}'
