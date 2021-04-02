@@ -15,7 +15,7 @@ jobs:
       uses: actions/github-script@0.9.0
       with:
         script: |
-          const id = context.payload.client_payload.value.split('-')[1]
+          const id = "1-2-3-4-5".split('-')[1]
           core.setOutput('id', id)
     - run: echo "${{steps.get-id.outputs.id}}"
     - run: |
@@ -26,4 +26,4 @@ jobs:
         webhook_type: 'json-extended'
         webhook_url: ${{ secrets.WEBHOOK_URL }}
         webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
-        data: '{ "weapon": "hammer", "drink" : ${{ github.event.issue.number }}}'
+        data: '{"drink" : ${{ github.event.issue.number }}}'
