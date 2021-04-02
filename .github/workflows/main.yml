@@ -15,7 +15,7 @@ jobs:
       uses: actions/github-script@0.9.0
       with:
         script: |
-          const id = ${{ github.event.issue.number }}.split('Case number :')[1].split('Opened by :')[0]
+          const id = ${{ github.event.issue.body }}.split('Case number :')[1].split('Opened by :')[0]
           core.setOutput('id', id)
     - run: echo "${{steps.get-id.outputs.id}}"
     - run: |
@@ -26,4 +26,4 @@ jobs:
         webhook_type: 'json-extended'
         webhook_url: ${{ secrets.WEBHOOK_URL }}
         webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
-        data: '{"drink" : ${{ github.event.issue.number }}}'
+        data: '{"drink" : ${{ github.event.issue.body }}}'
