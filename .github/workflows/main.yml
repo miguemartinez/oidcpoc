@@ -14,7 +14,7 @@ jobs:
     - id: get-id
       uses: actions/github-script@0.9.0
       with:
-        script: >-
+        script: >
           const id = '${{ github.event.issue.body }}'.split('Case number :')[1].split('Opened by :')[0]
           core.setOutput('id', id)
     - run: echo "${{steps.get-id.outputs.id}}"
