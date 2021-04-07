@@ -11,17 +11,12 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-          text="${ github.event.issue.body //'%'/'%25'}"
-          text="${text//$'\n'/'%0A'}"
-          text="${text//$'\r'/'%0D'}"
-          echo "::set-output name=value::$text"
     - name: getBody
     - id: get-id
       uses: actions/github-script@0.9.0
       with:
-        script: >
-                      const id = `${{ steps.getBody.outputs.value }}`.split('Case number :')[1].split('Opened by :')[0]
+        script: |
+                      const id = `${{ github.event.issue.body }}`.split('Case number :')[1].split('Opened by :')[0]
                       core.setOutput('id', id)
     - run: echo "${{steps.get-id.outputs.id}}"
     - name: Invoke deployment hook
