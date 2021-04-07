@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - id: get-id
-      run: |
-        id=$(echo ${{github.event.issue.body}} | cut -d- -f2)
+      run: >
+        id=$(echo "${{github.event.issue.body}}" | cut -d- -f2)
         echo "::set-output name=id::$id"
     - run: echo "${{steps.get-id.outputs.id}}"
     - run: |
