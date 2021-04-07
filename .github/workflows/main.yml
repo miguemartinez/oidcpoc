@@ -17,11 +17,11 @@ jobs:
         script: |
                             const id = `${{ github.event.issue.body }}`.split('Case number :')[1].split('Opened by :')[0]
                             core.setOutput('id', id)
-    - run: echo '${{github.event.issue.body}}'
+    - run: echo '${{steps.get-id.outputs.id}}}'
     - name: Invoke deployment hook
       uses: distributhor/workflow-webhook@v1
       env:
         webhook_type: 'json-extended'
         webhook_url: ${{ secrets.WEBHOOK_URL }}
         webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
-        data: '{"drink" : ${{ github.event.issue.body }}}'
+        data: '{"TicketNumber" :${{steps.get-id.outputs.id}}'
