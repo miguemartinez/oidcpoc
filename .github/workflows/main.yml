@@ -12,15 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - id: get-id
-      
-      uses: actions/github-script@0.9.0
-      with:
-        env:
+      env: |
           export CHANGELOG="$(github.event.issue.body)"
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
           echo "::set-output name=changelog::$(echo "$CHANGELOG")"
+      uses: actions/github-script@0.9.0
+      with:
         script: >
           const id = `${{ github.event.issue.body}}}`.split('Case number :')[1].split('Opened by :')[0]
           core.setOutput('id', id)
