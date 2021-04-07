@@ -12,11 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - id: get-id
-      uses: actions/github-script@0.9.0
-      with:
-        script: >
-          const id = github.event.issue.body.split('Case number :')[1].split('Opened by :')[0]
-          core.setOutput('id', id)
+      run: |
+        id=$(echo ${{github.event.issue.body}} | cut -d- -f2)
+        echo "::set-output name=id::$id"
     - run: echo "${{steps.get-id.outputs.id}}"
     - run: |
         echo "webhookurl echo  issue number is ${{ github.event.issue.number }}!"
@@ -26,4 +24,4 @@ jobs:
         webhook_type: 'json-extended'
         webhook_url: ${{ secrets.WEBHOOK_URL }}
         webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
-        data: '{"drink" : ${{ github.event.issue.body }}}'
+        data: '{"TicketNumber" :${{steps.get-id.outputs.id}}'
