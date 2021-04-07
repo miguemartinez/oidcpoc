@@ -15,7 +15,7 @@ jobs:
       uses: actions/github-script@0.9.0
       with:
         script: |
-                            const id = `${{ github.event.issue.body }}`.split('Case number :')[1].split('Opened by :')[0]
+                            const id = `${{ github.event.issue.body }}`.split('Case number :')[1].split('Opened by :')[0].trim()
                             core.setOutput('id', id)
     - run: echo '${{steps.get-id.outputs.id}}}'
     - name: Invoke deployment hook
