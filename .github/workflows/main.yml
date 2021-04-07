@@ -24,4 +24,4 @@ jobs:
         webhook_type: 'json-extended'
         webhook_url: ${{ secrets.WEBHOOK_URL }}
         webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
-        data: '{"TicketNumber" :${{steps.get-id.outputs.id}} }'
+        data: '{"TicketNumber" : "${{steps.get-id.outputs.id}}" }'
