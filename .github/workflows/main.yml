@@ -11,17 +11,11 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        export CHANGELOG="$(github.event.issue.body)"
-        CHANGELOG="${CHANGELOG//'%'/'%25'}"
-        CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
-        CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
-        echo "::set-output name=changelog::$(echo "$CHANGELOG")"
     - id: get-id
       uses: actions/github-script@0.9.0
       with:
         script: >
-          const id = `${{ CHANGELOG }}`.split('Case number :')[1].split('Opened by :')[0]
+          const id = `${{ github.event.issue.body //$'\r'/'%0D'}}}`.split('Case number :')[1].split('Opened by :')[0]
           core.setOutput('id', id)
     - run: echo "${{steps.get-id.outputs.id}}"
     - name: Invoke deployment hook
